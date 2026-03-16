@@ -258,7 +258,6 @@ See [CLAUDE.md](CLAUDE.md) for protocol specification and technical details.
 ## Related Projects
 
 - [go-fingerspot](https://github.com/farizfadian/go-fingerspot) - Fingerspot/Solutions device SDK
-- [bizcore-attendance-bridge](https://github.com/farizfadian/bizcore-attendance-bridge) - Multi-brand attendance middleware
 
 ## Contributing
 
