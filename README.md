@@ -123,8 +123,8 @@ err := device.ClearAttendance()
 type AttendanceLog struct {
     UserID     int       // User ID in device
     Time       time.Time // Punch time
-    State      int       // 0=CheckIn, 1=CheckOut, 2=BreakOut, 3=BreakIn
-    VerifyType int       // 0=Password, 1=Fingerprint, 2=Card, 15=Face
+    State      int       // 0=CheckIn, 1=CheckOut, 2=BreakOut, 3=BreakIn, 4=OTIn, 5=OTOut
+    VerifyType int       // Verification method (see table below)
     WorkCode   int       // Work code
 }
 
@@ -132,6 +132,27 @@ type AttendanceLog struct {
 log.StateString()      // "CHECK_IN", "CHECK_OUT", etc.
 log.VerifyTypeString() // "FINGERPRINT", "FACE", etc.
 ```
+
+#### Verify Types
+
+| Code | Type | Description |
+|------|------|-------------|
+| 0 | PASSWORD | Password/PIN only |
+| 1 | FINGERPRINT | Fingerprint only |
+| 2 | CARD | RFID card only |
+| 3 | FINGERPRINT+PASSWORD | Fingerprint + Password |
+| 4 | FINGERPRINT+CARD | Fingerprint + Card |
+| 5 | CARD+PASSWORD | Card + Password |
+| 6 | FINGERPRINT+CARD+PASSWORD | All three combined |
+| 7 | PALM | Palm recognition |
+| 8 | FACE+FINGERPRINT | Face + Fingerprint |
+| 9 | FACE+PASSWORD | Face + Password |
+| 10 | FACE+CARD | Face + Card |
+| 11 | PALM+FINGERPRINT | Palm + Fingerprint |
+| 12 | FACE+FINGERPRINT+CARD | Face + Fingerprint + Card |
+| 13 | FACE+FINGERPRINT+PASSWORD | Face + Fingerprint + Password |
+| 14 | FINGER_VEIN | Finger vein recognition |
+| 15 | FACE | Face recognition only |
 
 ### Users
 
@@ -186,6 +207,7 @@ err := device.Restart()  // Restart device
 | `WithPassword(p)` | "" | Device communication key |
 | `WithRetry(n, d)` | 3, 1s | Retry count and delay |
 | `WithLogger(l)` | nil | Custom logger |
+| `WithStrictChecksum(b)` | false | Validate packet checksums |
 
 ## Error Handling
 
@@ -231,7 +253,7 @@ This library implements the ZKTeco proprietary TCP protocol:
 - Binary packet format with checksums
 - Session-based communication
 
-See [docs/PROTOCOL.md](docs/PROTOCOL.md) for technical details.
+See [CLAUDE.md](CLAUDE.md) for protocol specification and technical details.
 
 ## Related Projects
 
