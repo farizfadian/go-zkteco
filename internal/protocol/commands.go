@@ -61,10 +61,22 @@ const (
 
 // Verify types (how the user was verified)
 const (
-	VERIFY_PASSWORD    = 0
-	VERIFY_FINGERPRINT = 1
-	VERIFY_CARD        = 2
-	VERIFY_FACE        = 15
+	VERIFY_PASSWORD               = 0
+	VERIFY_FINGERPRINT            = 1
+	VERIFY_CARD                   = 2
+	VERIFY_FINGERPRINT_PASSWORD   = 3
+	VERIFY_FINGERPRINT_CARD       = 4
+	VERIFY_CARD_PASSWORD          = 5
+	VERIFY_FINGERPRINT_CARD_PWD   = 6
+	VERIFY_PALM                   = 7
+	VERIFY_FACE_FINGERPRINT       = 8
+	VERIFY_FACE_PASSWORD          = 9
+	VERIFY_FACE_CARD              = 10
+	VERIFY_PALM_FINGERPRINT       = 11
+	VERIFY_FACE_FINGERPRINT_CARD  = 12
+	VERIFY_FACE_FINGERPRINT_PWD   = 13
+	VERIFY_FINGER_VEIN            = 14
+	VERIFY_FACE                   = 15
 )
 
 // Attendance states
@@ -94,6 +106,30 @@ func VerifyTypeString(verifyType int) string {
 		return "FINGERPRINT"
 	case VERIFY_CARD:
 		return "CARD"
+	case VERIFY_FINGERPRINT_PASSWORD:
+		return "FINGERPRINT+PASSWORD"
+	case VERIFY_FINGERPRINT_CARD:
+		return "FINGERPRINT+CARD"
+	case VERIFY_CARD_PASSWORD:
+		return "CARD+PASSWORD"
+	case VERIFY_FINGERPRINT_CARD_PWD:
+		return "FINGERPRINT+CARD+PASSWORD"
+	case VERIFY_PALM:
+		return "PALM"
+	case VERIFY_FACE_FINGERPRINT:
+		return "FACE+FINGERPRINT"
+	case VERIFY_FACE_PASSWORD:
+		return "FACE+PASSWORD"
+	case VERIFY_FACE_CARD:
+		return "FACE+CARD"
+	case VERIFY_PALM_FINGERPRINT:
+		return "PALM+FINGERPRINT"
+	case VERIFY_FACE_FINGERPRINT_CARD:
+		return "FACE+FINGERPRINT+CARD"
+	case VERIFY_FACE_FINGERPRINT_PWD:
+		return "FACE+FINGERPRINT+PASSWORD"
+	case VERIFY_FINGER_VEIN:
+		return "FINGER_VEIN"
 	case VERIFY_FACE:
 		return "FACE"
 	default:

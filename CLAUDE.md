@@ -243,7 +243,7 @@ type AttendanceLog struct {
     UserID     int       // User ID in device
     Time       time.Time // Punch time
     State      int       // 0=CheckIn, 1=CheckOut, 2=BreakOut, 3=BreakIn, 4=OTIn, 5=OTOut
-    VerifyType int       // 0=Password, 1=Fingerprint, 2=Card, 15=Face
+    VerifyType int       // 0=Password, 1=FP, 2=Card, 3-6=Combos, 7=Palm, 8-13=Face combos, 14=Vein, 15=Face
     WorkCode   int       // Work code (if supported)
 }
 
@@ -259,15 +259,12 @@ func (a AttendanceLog) StateString() string {
     }
 }
 
-func (a AttendanceLog) VerifyTypeString() string {
-    switch a.VerifyType {
-    case 0: return "PASSWORD"
-    case 1: return "FINGERPRINT"
-    case 2: return "CARD"
-    case 15: return "FACE"
-    default: return "UNKNOWN"
-    }
-}
+// VerifyTypeString() supports all 16 types:
+// 0=PASSWORD, 1=FINGERPRINT, 2=CARD, 3=FINGERPRINT+PASSWORD,
+// 4=FINGERPRINT+CARD, 5=CARD+PASSWORD, 6=FINGERPRINT+CARD+PASSWORD,
+// 7=PALM, 8=FACE+FINGERPRINT, 9=FACE+PASSWORD, 10=FACE+CARD,
+// 11=PALM+FINGERPRINT, 12=FACE+FINGERPRINT+CARD,
+// 13=FACE+FINGERPRINT+PASSWORD, 14=FINGER_VEIN, 15=FACE
 ```
 
 ### User
