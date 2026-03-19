@@ -25,6 +25,9 @@ import (
 )
 
 const (
+	// Version is the current version of the go-zkteco library.
+	Version = "0.1.0"
+
 	// DefaultPort is the default ZKTeco TCP port
 	DefaultPort = 4370
 
